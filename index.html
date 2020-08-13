@@ -8,59 +8,111 @@
 
     <title>BMI 計算機</title>
 
-    <link rel="stylesheet" href="./library/css/bootstrap.css">
-    <script src="./library/js/jquery-2.2.4.js"></script>
-    <script src="./library/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
     <style>
-        .my-container{
-            padding-left: 0px;
-            padding-right: 0px;
+        .buttom-box{
+            margin-top: 31px;
         }
+
     </style>
+    <script>
+        $(function(){
+            $("#calc2").click(function () {
+                var h =  $("#height").val();
+                var w =  $("#weight").val();
+
+                if( h == '' ) {
+                    alert('請輸入身高');
+                } else if( w == '' ) {
+                    alert('請輸入體重');
+                } else if( h > 3 ) {
+                    alert('身高請輸入公尺')
+                } else {
+                    var bmi = w / ( h * h );
+                    $('#result').val(bmi);
+                    $('#height').val('');
+                    $('#weight').val('');
+                }
+
+                var a =  $("#age").val();
+                var s =  $("#sex").val();
+
+                if( a == '' ) {
+                    alert('年齡');
+                } else if( s == '' ) {
+                    alert('請選擇性別');
+                } else {
+                    var bodyfat =( 1.2*bmi )+( 0.23*a-5.4 )-(10.8*s);
+                    $('#fat').val(bodyfat)
+                    $('#age').val('');
+                    $('#sex').val('');
+                }
+            });
+
+        });
+    </script>
 </head>
 <body>
-<div class="container-fluid my-container">
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">BMI 計算機</a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="http://hahow.in" target="_blank">About</a></li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
+<div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">BMI</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
     </nav>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 box">
             <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                <label for="height">輸入身高(m)</label>
+                <input type="number" class="form-control" id="height" placeholder="身高">
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 box">
             <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                <label for="weight">輸入體重(kg)</label>
+                <input type="number" class="form-control" id="weight" placeholder="體重">
             </div>
         </div>
-        <div class="col-md-4">
-            <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="result">您的 BMI</label>
+                <input type="number" class="form-control" id="result" readonly="true">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 box">
+            <div class="form-group">
+                <label for="age">年齡</label>
+                <input type="number" class="form-control" id="age" placeholder="身高">
+            </div>
+        </div>
+        <div class="col-md-4 box">
+            <label for="age">性別</label>
+            <select class="form-control" id="sex">
+                <option value="1">男</option>
+                <option value="0">女</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="fat">體脂肪率</label>
+                <input type="number" class="form-control" id="fat" readonly="true">
+            </div>
+        </div>
+        <div class="col-md-1 buttom-box">
+            <div class="form-group">
+                <button type="button" id="calc2" class="btn btn-primary">計算</button>
+            </div>
+        </div>
 
-        </div>
     </div>
 </div>
 </body>
